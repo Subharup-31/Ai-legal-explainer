@@ -560,6 +560,10 @@ if 'session_id' not in st.session_state:
 if 'processed_docs' not in st.session_state:
     st.session_state.processed_docs = {}
 
+# Add a key for the file uploader to allow for programmatic clearing.
+if 'uploader_key' not in st.session_state:
+    st.session_state.uploader_key = 0
+
 # ===========================
 # MAIN UI LAYOUT
 # ===========================
@@ -577,7 +581,8 @@ with col1:
     uploaded_file = st.file_uploader(
         "Choose a PDF file",
         type="pdf",
-        help="Upload a PDF document to chat with"
+        help="Upload a PDF document to chat with",
+        key=f"uploader_{st.session_state.uploader_key}"
     )
 
     if uploaded_file is not None:
@@ -632,8 +637,8 @@ with col1:
         if st.button("🗑️ Clear Chat Only", type="secondary"):
             try:
                 st.session_state.messages = []
-                if 'gemini_handler' in locals():
-                    gemini_handler.chat_sessions = {}
+                # Clear Gemini chat sessions
+                gemini_handler.chat_sessions = {}
                 st.success("✅ Chat history cleared!")
                 st.rerun()
             except Exception as e:
@@ -643,8 +648,9 @@ with col1:
             try:
                 st.session_state.messages = []
                 st.session_state.processed_docs = {}
-                if 'gemini_handler' in locals():
-                    gemini_handler.chat_sessions = {}
+                gemini_handler.chat_sessions = {}
+                # Increment the uploader key to force a reset of the file uploader.
+                st.session_state.uploader_key += 1
                 st.success("✅ All memory cleared!")
                 st.rerun()
             except Exception as e:
@@ -797,6 +803,8 @@ with col2:
             "timestamp": timestamp
         })
         
+        # Rerun to refresh the chat display with the new message
+        st.rerun()
 
 # ===========================
 # SIDEBAR INFORMATION
