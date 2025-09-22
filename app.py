@@ -32,7 +32,6 @@ Core Functionalities:
     -   Features session management, chat history, and document management.
     -   Provides options to export conversations and clear session memory.
 
-This file is now fully commented to improve readability and maintainability.
 """
 
 import streamlit as st
