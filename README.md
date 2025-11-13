@@ -195,7 +195,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📬 Contact
 
 For all inquiries: [subharupn@gmail.com](mailto:subharupn@gmail.com)  
-Connect on [LinkedIn](https://linkedin.com/in/yourprofile) | [GitHub](https://github.com/yourusername)
+Connect on [LinkedIn](https://www.linkedin.com/in/subharup-nandi-776293353/) | [GitHub](https://github.com/yourusername)
 
 ---
 
