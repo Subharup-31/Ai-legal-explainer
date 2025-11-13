@@ -31,7 +31,7 @@ Core Functionalities:
     -   Built with Streamlit for a clean and interactive web application.
     -   Features session management, chat history, and document management.
     -   Provides options to export conversations and clear session memory.
-
+   
 """
 
 import streamlit as st
@@ -460,8 +460,8 @@ class GeminiHandler:
         Initializes the GeminiHandler.
         """
         st.write("🔄 Initializing Gemini AI...")
-        # Use the 'gemini-1.5-flash' model, which is optimized for speed and efficiency.
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        # Use the 'gemini-2.5-flash' model, which is optimized for speed and efficiency.
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
         # A dictionary to store ongoing chat sessions, enabling conversation memory.
         self.chat_sessions = {}
         st.write("✅ Gemini AI ready!")
