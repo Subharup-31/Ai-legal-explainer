@@ -161,7 +161,7 @@ class DocumentProcessor:
         try:
             file_content = pdf_file.read()
             # Generate a unique hash for the file content to use as a cache key.
-            file_hash = hashlib.md5(file_content).hexdigest()
+            file_hash = hashlib.sha256(file_content).hexdigest()
             pdf_file.seek(0)  # Reset file pointer for subsequent use.
 
             # Check the cache first to avoid reprocessing.
@@ -375,7 +375,7 @@ class PineconeHandler:
             # Structure the data in the format required by Pinecone.
             vectors_to_upsert = [
                 {
-                    "id": f"{hashlib.md5(f'{file_name}_{i}'.encode()).hexdigest()}",  # Create a unique ID for each vector.
+                    "id": f"{hashlib.sha256(f'{file_name}_{i}'.encode()).hexdigest()}",  # Create a unique ID for each vector.
                     "values": vector,
                     "metadata": {
                         "text": text[:1000],  # Store the text chunk (truncated to avoid size limits).
@@ -587,7 +587,7 @@ with col1:
     if uploaded_file is not None:
         try:
             file_content = uploaded_file.read()
-            file_hash = hashlib.md5(file_content).hexdigest()
+            file_hash = hashlib.sha256(file_content).hexdigest()
             uploaded_file.seek(0)
             
             if file_hash not in st.session_state.processed_docs:
