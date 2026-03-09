@@ -154,21 +154,21 @@ class DocumentProcessor:
 
         Args:
             pdf_file: A file-like object representing the uploaded PDF.
-
-        Returns:
-            str: The extracted text content of the PDF. Returns an empty string on failure.
-        """
-        try:
-            file_content = pdf_file.read()
-            # Generate a unique hash for the file content to use as a cache key.
-            file_hash = hashlib.md5(file_content).hexdigest()
-            pdf_file.seek(0)  # Reset file pointer for subsequent use.
-
-            # Check the cache first to avoid reprocessing.
-            if file_hash in self.memory_cache:
-                st.info("📄 Found document in cache. Skipping extraction.")
-                return self.memory_cache[file_hash]
-
+     157 | 
+     158 |         Returns:
+     159 |             str: The extracted text content of the PDF. Returns an empty string on failure.
+     160 |         """
+     161 |         try:
+     162 |             file_content = pdf_file.read()
+     163 |             # Generate a unique hash for the file content to use as a cache key.
+>>>  164 |             file_hash = hashlib.sha256(file_content).hexdigest()
+     165 |             pdf_file.seek(0)  # Reset file pointer for subsequent use.
+     166 | 
+     167 |             # Check the cache first to avoid reprocessing.
+     168 |             if file_hash in self.memory_cache:
+     169 |                 st.info("📄 Found document in cache. Skipping extraction.")
+     170 |                 return self.memory_cache[file_hash]
+     171 | 
             st.write("🤖 Calling Google Cloud Document AI for text extraction...")
             
             # Configure the Document AI client with the specified location.
